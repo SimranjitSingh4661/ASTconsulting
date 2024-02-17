@@ -30,12 +30,8 @@ const WelcomeScreen = () => {
   }, [error]);
 
   const onRegister = () => {
-    console.log('onRegister');
     auth()
-      .createUserWithEmailAndPassword(
-        'jane.doe@example.com',
-        'SuperSecretPassword!',
-      )
+      .createUserWithEmailAndPassword(email, password)
       .then(() => {
         Toast.show({
           type: 'success',
@@ -49,8 +45,6 @@ const WelcomeScreen = () => {
         if (error.code === 'auth/invalid-email') {
           setError(STRINGS.ERROR.EMAIL_INVALID);
         }
-        console.log('error', error);
-
         if (!error) {
           setError(STRINGS.ERROR.SOMETHING_WENT_WRONG);
         }
@@ -58,12 +52,8 @@ const WelcomeScreen = () => {
   };
 
   const onLogin = () => {
-    console.log('onLogin');
     auth()
-      .signInWithEmailAndPassword(
-        'jane.doe@example.com',
-        'SuperSecretPassword!',
-      )
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         Toast.show({
           type: 'success',
@@ -74,15 +64,32 @@ const WelcomeScreen = () => {
         if (error.code === 'auth/invalid-credential') {
           setError(STRINGS.ERROR.CREDENTIAL_IS_INCORRECT);
         }
-
-        console.error(error);
         if (!error) {
           setError(STRINGS.ERROR.SOMETHING_WENT_WRONG);
         }
       });
   };
 
+  const validateEmail = email => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   const onSubmit = () => {
+    if (!validateEmail(email)) {
+      Toast.show({
+        type: 'error',
+        text1: 'Please enter a valid email address.',
+      });
+      return;
+    }
+    if (password.length < 8) {
+      Toast.show({
+        type: 'error',
+        text1: 'Password must be at least 8 characters long.',
+      });
+      return;
+    }
     setError('');
     if (activeTab == 'Register') {
       onRegister();
