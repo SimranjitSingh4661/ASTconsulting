@@ -27,7 +27,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   btn: {
-    flex: 1,
+    // flex: 1,
     marginTop: 20,
     elevation: 4,
     borderRadius: 50,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
   },
   disabled: {
-    flex: 1,
+    // flex: 1,
     marginTop: 20,
     elevation: 4,
     borderRadius: 50,
@@ -53,5 +53,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: 'bold',
+    paddingHorizontal: 20,
   },
 });

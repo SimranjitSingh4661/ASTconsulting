@@ -1,14 +1,16 @@
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation';
-// import {enableLatestRenderer} from 'react-native-maps';
+import Toast from 'react-native-toast-message';
+import {enableLatestRenderer} from 'react-native-maps';
 
-// enableLatestRenderer();
+enableLatestRenderer();
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <AppNavigator />
+      <Toast />
     </SafeAreaProvider>
   );
 };

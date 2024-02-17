@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "871576608032",
+    "project_id": "ast-consulting-3b8da",
+    "storage_bucket": "ast-consulting-3b8da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871576608032:android:77ea058d46ee3f0d04cb45",
+        "android_client_info": {
+          "package_name": "com.astconsulting"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzYFqk3Ik1Pt4AmIrT0X8dLjqMdU3_2io"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
