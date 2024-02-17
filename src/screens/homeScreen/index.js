@@ -18,6 +18,7 @@ import {COLORS, STRINGS} from '../../constants';
 import Toast from 'react-native-toast-message';
 import styles from './styles';
 import LoadingScreen from '../loadingScreen';
+import ErrorScreen from '../ErrorScreen';
 import {HospitalCard} from '../../components/molecules';
 
 const HomeScreen = () => {
@@ -31,6 +32,7 @@ const HomeScreen = () => {
   const [initializing, setInitializing] = useState(true);
   const [markers, setMarkers] = useState([]);
   const [origin, setOrigin] = useState({});
+  const [error, setError] = useState('');
   const [hospital, setHospital] = useState({});
   const mapRef = useRef(null);
 
@@ -94,8 +96,6 @@ const HomeScreen = () => {
       const locationRes = await getUserCurrentLocation();
       const latitude = locationRes.latitude;
       const longitude = locationRes.longitude;
-
-      console.log('locationRes', locationRes);
       setOrigin({
         latitude,
         longitude,
@@ -104,9 +104,11 @@ const HomeScreen = () => {
       });
       const results = await fetchData(latitude, longitude);
       setMarkers(results);
-      setInitializing(false);
+      setTimeout(() => {
+        setInitializing(false);
+      }, 500);
     } catch (err) {
-      console.log('why---', err);
+      setError(err || STRINGS.ERROR.SOMETHING_WENT_WRONG);
       Toast.show({
         type: 'error',
         text1: err || STRINGS.ERROR.SOMETHING_WENT_WRONG,
@@ -144,6 +146,10 @@ const HomeScreen = () => {
 
   if (initializing) {
     return <LoadingScreen fetchData />;
+  }
+
+  if (error) {
+    return <ErrorScreen onPress={fetchLocationDetails} />;
   }
 
   return (
